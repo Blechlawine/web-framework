@@ -1,17 +1,20 @@
 import { h } from "./h";
-import { createElement } from "./vdom";
+import { DomNode, updateElement } from "./vdom";
 
 class _App {
     constructor(mountElement: Element, appComponent: () => ReturnType<typeof h>) {
         this._appComponent = appComponent;
         this._mountElement = mountElement;
     }
-    _mountElement: Element | undefined = undefined;
-    _appComponent: (() => ReturnType<typeof h> | string) | undefined = undefined;
+    _mountElement?: Element;
+    _appComponent?: () => ReturnType<typeof h>;
+    _vDom?: DomNode;
     render() {
-        console.debug(this);
         if (!this._mountElement || !this._appComponent) throw Error("App is not mounted");
-        this._mountElement!.replaceChildren(createElement(this._appComponent()));
+        
+        const oldVDom = this._vDom;
+        this._vDom = this._appComponent();
+        updateElement(this._mountElement!, this._vDom, oldVDom);
     }
 }
 

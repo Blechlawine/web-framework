@@ -28,6 +28,30 @@ export class DomNode {
         this.children = children;
         this.props = props;
         this.tag = tag;
-        console.log(this);
     }
+}
+
+export function updateElement(parent: ChildNode, newNode: DomNode, oldNode?: DomNode, index = 0) {
+    console.log(newNode, oldNode);
+    if (!oldNode) {
+        parent.appendChild(createElement(newNode));
+    } else if (!newNode) {
+        parent.removeChild(parent.childNodes[index]);
+    } else if (diff(oldNode, newNode)) {
+        parent.replaceChild(createElement(newNode), parent.childNodes[index]);
+    } else if (newNode.tag) {
+        const newLength = newNode.children.length;
+        const oldLength = oldNode.children.length;
+        for (let i = 0; i < newLength || i < oldLength; i++) {
+            updateElement(parent.childNodes[index], newNode.children[i], oldNode.children[i], i);
+        }
+    }
+}
+
+function diff(oldNode: DomNode, newNode: DomNode) {
+    return (
+        typeof oldNode !== typeof newNode ||
+        (typeof oldNode === "string" && oldNode !== newNode) ||
+        oldNode.tag !== newNode.tag
+    );
 }
