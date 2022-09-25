@@ -1,30 +1,9 @@
-type TTag = string | ((props: TProps, children: TChildren) => JSX.Element);
+import { DomNode } from "./vdom";
 
-type TProps = Record<string, string | (() => any)> | null;
-
-type TChildren = (JSX.Element | string)[];
-
-export const h = (tag: TTag, props: TProps, ...children: TChildren) => {
+export const h = (tag: TTag, props: TProps, ...children: DomNode["children"]) => {
     if (typeof tag === "function") return tag({ ...props }, children);
 
-    const el = document.createElement(tag);
-    if (props) {
-        Object.entries(props).forEach(([key, val]) => {
-            if (key === "className") {
-                el.classList.add(...((val as string) || "".trim().split(" ")));
-                return;
-            } else if (/^on\w+/.test(key) && typeof val === "function") {
-                el.addEventListener(key.toLowerCase(), val, false);
-                return;
-            } else if (typeof val === "string") {
-                el.setAttribute(key, val);
-            }
-        });
-    }
-    children.forEach((child) => {
-        el.append(child);
-    });
-    return el;
+    return new DomNode(tag, props, children);
 };
 
 export const Fragment = () => null;

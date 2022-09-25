@@ -2,8 +2,8 @@ import { h } from "../lib/h";
 
 const App = () => {
     return (
-        <div>
-            
+        <div className="Hellothere">
+            Hello there
         </div>
     );
 };
