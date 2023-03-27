@@ -1,19 +1,4 @@
-import { Signal, createEffect, isSignal } from "./signals";
-
-type DomNode =
-	| {
-			tag: string;
-			props: Record<
-				string,
-				| string
-				| (() => void)
-				| number
-				| boolean
-				| Signal<boolean | string | number | object>
-			> | null;
-			children: DomNode[];
-	  }
-	| string;
+import { createEffect, isSignal } from "./signals";
 
 export const h = (
 	tag: TTag,

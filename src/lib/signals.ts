@@ -1,18 +1,3 @@
-type ReactiveEffect = {
-	run: () => void;
-	dependencies: Set<Set<ReactiveEffect>>;
-};
-
-type InternalSignal<T> = {
-	value: T;
-	subscribers: Set<ReactiveEffect>;
-};
-
-export type Signal<T> = {
-	__signal__: true,
-	value: T;
-};
-
 // Here we store all effects which are currently running.
 const context: ReactiveEffect[] = [];
 
@@ -90,6 +75,6 @@ export function computed<T>(fn: () => T) {
 }
 
 // rome-ignore lint/suspicious/noExplicitAny: <explanation>
-export  function isSignal<T>(obj: any): obj is Signal<T> {
+export function isSignal<T>(obj: any): obj is Signal<T> {
 	return obj?.__signal__;
 }
