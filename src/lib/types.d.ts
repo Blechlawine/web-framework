@@ -2,6 +2,7 @@ declare namespace JSX {
 	interface IntrinsicElements {
 		div: any;
 		button: any;
+		[key: string]: any;
 	}
 	interface Element extends Node {}
 }
