@@ -1,9 +1,9 @@
 declare namespace JSX {
-    interface IntrinsicElements {
-        div: any;
-        button: any;
-    }
-    interface Element extends Node {}
+	interface IntrinsicElements {
+		div: any;
+		button: any;
+	}
+	interface Element extends Node {}
 }
 
 type TTag = string | ((props: TProps, children: TChildren) => DomNode);
