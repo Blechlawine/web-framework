@@ -1,5 +1,6 @@
 import { h } from "../lib/h";
 import { computed, createSignal } from "../lib/signals";
+import { Counter } from "./Counter";
 import Test from "./Test";
 
 const App = () => {
@@ -19,6 +20,7 @@ const App = () => {
 			{data2}
 			<button onClick={changeData}>Change data</button>
 			<Test />
+			<Counter />
 		</div>
 	);
 };
