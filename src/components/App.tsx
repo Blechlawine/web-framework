@@ -14,8 +14,12 @@ const App = () => {
 		return `${data.value} ${data.value}`;
 	});
 
+	const classes = computed(() => ({
+		dataIsHello: data.value === "Hello",
+	}));
+
 	return (
-		<div class="Hellothere">
+		<div class={classes} data-test={data2}>
 			{data} there
 			{data2}
 			<button onClick={changeData}>Change data</button>

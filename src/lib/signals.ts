@@ -89,8 +89,7 @@ export function computed<T>(fn: () => T) {
 	return internalSignal;
 }
 
-
 // rome-ignore lint/suspicious/noExplicitAny: <explanation>
-export  function isSignal(obj: any): obj is Signal<any> {
+export  function isSignal<T>(obj: any): obj is Signal<T> {
 	return obj?.__signal__;
 }
