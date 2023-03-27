@@ -1,8 +1,10 @@
 import { defineConfig } from "vite";
+import Inspect from "vite-plugin-inspect";
 
 export default defineConfig({
-    esbuild: {
-        jsxFactory: "h",
-        jsxFragment: "Fragment",
-    },
+	plugins: [Inspect()],
+	esbuild: {
+		jsxFactory: "h",
+		jsxFragment: "Fragment",
+	},
 });

@@ -1,17 +1,17 @@
 import { h } from "../lib/h";
-import { ref } from "../lib/reactivity";
+import { createSignal } from "../lib/signals";
 import Test from "./Test";
 
 const App = () => {
-	const data = ref("Hello");
+	const data = createSignal("Hello");
 
 	const changeData = () => {
 		data.value = "not hello";
 	};
 
 	return (
-		<div className="Hellothere">
-			{data.value} there
+		<div class="Hellothere">
+			{data} there
 			<button onClick={changeData}>Change data</button>
 			<Test />
 		</div>
