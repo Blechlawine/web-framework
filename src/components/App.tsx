@@ -1,5 +1,5 @@
 import { h } from "../lib/h";
-import { createSignal } from "../lib/signals";
+import { computed, createSignal } from "../lib/signals";
 import Test from "./Test";
 
 const App = () => {
@@ -9,9 +9,14 @@ const App = () => {
 		data.value = "not hello";
 	};
 
+	const data2 = computed(() => {
+		return `${data.value} ${data.value}`;
+	});
+
 	return (
 		<div class="Hellothere">
 			{data} there
+			{data2}
 			<button onClick={changeData}>Change data</button>
 			<Test />
 		</div>
